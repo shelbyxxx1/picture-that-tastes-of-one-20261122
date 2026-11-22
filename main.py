@@ -23,6 +23,8 @@ def main() -> int:
     dst = os.path.join(out_dir, "entry.png")
     shutil.copyfile(src, dst)
     size = os.path.getsize(dst)
+    if size > 1_048_576:
+        raise SystemExit(f"output too large: {size} bytes (cap 1 MiB)")
     print(f"wrote {dst} ({size} bytes)")
     return 0
 
